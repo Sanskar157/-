@@ -8,16 +8,6 @@ export default function HomePage() {
   const router = useRouter();
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const topics = [
-    { name: "Samsara", path: "/samsara" },
-    { name: "Pattica Samuppada", path: "/pattica-samuppada" },
-    { name: "Avijja", path: "/avijja" },
-    { name: "Nirvana", path: "/nirvana" },
-    { name: "Anicca", path: "/anicca" },
-    { name: "Anatta", path: "/anatta" },
-    { name: "Brahmavihara", path: "/brahmavihara" },
-  ];
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest(".dropdown")) {
@@ -30,53 +20,6 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#0f0f0f] text-white min-h-screen flex flex-col items-center px-6">
-      {/* Header */}
-      <header className="w-full flex justify-between items-center py-6 max-w-7xl relative">
-        <h1 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-yellow-500 to-orange-600 text-transparent bg-clip-text">
-          Namo Buddhaya
-        </h1>
-        <nav>
-          <ul className="flex space-x-8 text-lg font-medium">
-            <motion.li
-              className="relative cursor-pointer transition duration-200 dropdown"
-              onClick={() => setShowDropdown(!showDropdown)}
-            >
-              <motion.span whileHover={{ scale: 1.1, color: "#facc15" }}>
-                Topics
-              </motion.span>
-              {showDropdown && (
-                <motion.ul
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute right-0 mt-2 w-48 bg-gray-900 border border-gray-700 shadow-lg rounded-lg overflow-hidden"
-                >
-                  {topics.map((topic, index) => (
-                    <li
-                      key={index}
-                      className="px-4 py-2 hover:bg-gray-800 cursor-pointer"
-                      onClick={() => {
-                        router.push(topic.path);
-                        setShowDropdown(false);
-                      }}
-                    >
-                      {topic.name}
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </motion.li>
-            <motion.li
-              whileHover={{ scale: 1.1, color: "#facc15" }}
-              className="cursor-pointer transition duration-200"
-            >
-              Support
-            </motion.li>
-          </ul>
-        </nav>
-      </header>
-
-      {/* Hero Section */}
       <motion.section
         className="flex flex-col items-center text-center py-20"
         initial={{ opacity: 0, y: 20 }}
@@ -93,7 +36,7 @@ export default function HomePage() {
           Unravel the Four Noble Truths and embark on a journey toward Nirvana.
         </p>
         <motion.button
-          className="mt-8 px-8 py-4 bg-yellow-500 text-gray-900 rounded-xl text-lg font-bold tracking-wide shadow-lg hover:bg-yellow-600 transition-all duration-300"
+          className="mt-8 px-8 py-4 bg-yellow-500 text-gray-900 rounded-xl text-lg font-bold tracking-wide shadow-lg hover:bg-yellow-600 transition-all duration-300 cursor-pointer"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => router.push('/four_noble_truths')}

@@ -9,12 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.43",
+    "@langchain/google-genai": "^0.2.1",
+    "axios": "^1.8.4",
     "framer-motion": "^12.6.2",
     "install": "^0.13.0",
     "namo-buddhaya": "file:",
     "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
