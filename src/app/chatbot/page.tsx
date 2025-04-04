@@ -7,19 +7,23 @@ import ReactMarkdown from "react-markdown";
 export default function Chatbot() {
   const [message, setMessage] = useState("");
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"; // Reset height
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px"; // Adjust height
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
     }
   };
 
   const sendMessage = async () => {
     if (!message.trim()) return;
+
+    setLoading(true);
+    setResponse(""); // Clear previous response
 
     try {
       const res = await axios.post("/api/chat", { message });
@@ -28,6 +32,8 @@ export default function Chatbot() {
     } catch (error) {
       console.error("Error:", error);
       setResponse("Error fetching response.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,12 +57,17 @@ export default function Chatbot() {
           <button
             className="bg-yellow-500 text-gray-900 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-yellow-400 transition active:scale-95"
             onClick={sendMessage}
+            disabled={loading}
           >
-            Ask
+            {loading ? "Thinking..." : "Ask"}
           </button>
         </div>
 
-        {response && (
+        {loading && (
+          <div className="mt-4 text-sm text-yellow-400 animate-pulse">Generating answer...</div>
+        )}
+
+        {!loading && response && (
           <div className="mt-4 bg-gray-900 p-4 text-base rounded-lg border border-gray-700 text-gray-200 prose prose-invert">
             <ReactMarkdown>{response}</ReactMarkdown>
           </div>
