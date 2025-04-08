@@ -23,7 +23,7 @@ export default function Chatbot() {
     if (!message.trim()) return;
 
     setLoading(true);
-    setResponse(""); // Clear previous response
+    setResponse("");
 
     try {
       const res = await axios.post("/api/chat", { message });

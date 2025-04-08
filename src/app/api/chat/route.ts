@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { model } from "@/lib/langchain";
+import { model } from "../../../lib/langchain";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
 export async function POST(req: Request) {
